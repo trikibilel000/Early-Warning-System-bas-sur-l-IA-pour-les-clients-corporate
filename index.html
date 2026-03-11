@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EWS Corporate — Amen Bank</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --accent: #00c6ff;
+    --accent2: #0072ff;
+    --green: #00e676;
+    --orange: #ff9800;
+    --red: #ff1744;
+    --text: #e2e8f0;
+    --text-dim: #64748b;
+    --text-mid: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1b2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .logo-text span {
+    display: block;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .header-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,198,255,0.1);
+    border: 1px solid rgba(0,198,255,0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.4; transform:scale(1.3); }
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+  }
+
+  /* SECTION TITLES */
+  .section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(0,198,255,0.2); }
+
+  /* CLIENT INFO */
+  .client-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,198,255,0.08);
+  }
+  .field select option { background: var(--surface2); }
+
+  /* RATIO GROUPS */
+  .ratio-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .ratio-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ratio-group-title .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .ratio-group-title .dot.orange { background: var(--orange); }
+
+  .ratio-item {
+    margin-bottom: 18px;
+  }
+  .ratio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+  }
+  .ratio-name {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .ratio-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+  .ratio-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .ratio-input-row input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .ratio-input-row input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,198,255,0.08);
+  }
+  .ratio-unit {
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    width: 40px;
+    text-align: right;
+  }
+  .ratio-info {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 3px;
+    font-style: italic;
+  }
+  .ratio-info .good { color: #4ade80; }
+  .ratio-info .warn { color: var(--orange); }
+  .ratio-info .bad { color: var(--red); }
+
+  /* SCORE BAR */
+  .score-bar-wrap {
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s, background 0.5s;
+  }
+
+  /* ANALYZE BUTTON */
+  .analyze-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 28px;
+    letter-spacing: 0.5px;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    box-shadow: 0 4px 20px rgba(0,114,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .analyze-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(0,114,255,0.4); }
+  .analyze-btn:active { transform: translateY(0); }
+
+  /* RIGHT PANEL */
+  .right-panel { display: flex; flex-direction: column; gap: 20px; }
+
+  /* RESULT CARD */
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .risk-gauge {
+    position: relative;
+    width: 160px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+  .risk-gauge svg { overflow: visible; }
+
+  .risk-score-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    font-weight: 600;
+    margin: 8px 0 4px;
+    transition: color 0.5s;
+  }
+
+  .risk-level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 8px 0 16px;
+    transition: all 0.5s;
+  }
+
+  .risk-recommendation {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 4px;
+    text-align: left;
+  }
+
+  /* RATIO BREAKDOWN */
+  .breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .breakdown-item:last-child { border-bottom: none; }
+  .breakdown-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .breakdown-info { flex: 1; }
+  .breakdown-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .breakdown-val { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+  .breakdown-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .breakdown-bar { height: 3px; background: var(--surface2); border-radius: 2px; margin-top: 4px; }
+  .breakdown-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s; }
+
+  /* WEIGHTS TABLE */
+  .weights-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .weights-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .weight-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--text-mid);
+  }
+  .weight-tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .tag-fin { background: rgba(0,198,255,0.1); color: var(--accent); }
+  .tag-beh { background: rgba(255,152,0,0.1); color: var(--orange); }
+
+  /* TOOLTIP */
+  .tooltip-wrap { position: relative; display: inline-block; cursor: help; margin-left: 5px; }
+  .tooltip-wrap .tip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--text-mid);
+    white-space: nowrap;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .tooltip-wrap:hover .tip { visibility: visible; }
+  .tooltip-icon { color: var(--text-dim); font-size: 11px; }
+
+  /* PLACEHOLDER */
+  .placeholder-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 30px 0;
+  }
+  .placeholder-icon { font-size: 40px; margin-bottom: 10px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; padding: 20px; }
+    .ratio-groups { grid-template-columns: 1fr; }
+    header { padding: 14px 20px; }
+    .client-form { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-text">
+      Early Warning System
+      <span>Direction Centrale Corporate · Amen Bank</span>
+    </div>
+  </div>
+  <div class="header-badge">
+    <div class="pulse"></div>
+    Modèle IA Actif
+  </div>
+</header>
+
+<main>
+  <!-- LEFT: INPUT PANEL -->
+  <div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="section-label">📋 Identification Client</div>
+      <div class="client-form">
+        <div class="field" style="grid-column:1/-1">
+          <label>Nom de l'entreprise</label>
+          <input type="text" id="client_name" placeholder="Ex : Société Nationale XYZ" />
+        </div>
+        <div class="field">
+          <label>Secteur d'activité</label>
+          <select id="secteur">
+            <option value="">-- Sélectionner --</option>
+            <option>Industrie manufacturière</option>
+            <option>Commerce & Distribution</option>
+            <option>Construction & Immobilier</option>
+            <option>Agriculture</option>
+            <option>Services</option>
+            <option>Transport & Logistique</option>
+            <option>Énergie</option>
+            <option>Télécommunications</option>
+            <option>Tourisme & Hôtellerie</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Ancienneté relation bancaire</label>
+          <select id="anciennete">
+            <option value="5">Moins de 2 ans</option>
+            <option value="3">2 – 5 ans</option>
+            <option value="1">Plus de 5 ans</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-label">📊 Ratios Financiers & Comportementaux</div>
+
+      <div class="ratio-groups">
+
+        <!-- FINANCIAL RATIOS -->
+        <div>
+          <div class="ratio-group-title"><span class="dot"></span> Ratios Financiers</div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Leverage
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Dette Totale / Fonds Propres · Risque élevé si > 3</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Dette / FP</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="leverage" placeholder="2.5" step="0.1" min="0" oninput="updateBar('leverage',0,6,'rev')" />
+              <span class="ratio-unit">x</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_leverage" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">< 2 : Bon</span> · <span class="warn">2–4 : Moyen</span> · <span class="bad">> 4 : Risque</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Debt / EBITDA
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Années nécessaires pour rembourser la dette · > 5 = critique</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Dettes / EBITDA</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="debt_ebitda" placeholder="3.5" step="0.1" min="0" oninput="updateBar('debt_ebitda',0,8,'rev')" />
+              <span class="ratio-unit">x</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_debt_ebitda" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">< 3 : Sain</span> · <span class="warn">3–5 : Attention</span> · <span class="bad">> 5 : Critique</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">DSCR
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Cash-flow / Service de la dette · < 1 = incapacité de remboursement</span>
+                </span>
+              </span>
+              <span class="ratio-formula">CF / Service dette</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="dscr" placeholder="1.5" step="0.05" min="0" oninput="updateBar('dscr',0,3,'normal')" />
+              <span class="ratio-unit">x</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_dscr" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">> 1.5 : Bon</span> · <span class="warn">1–1.5 : Limite</span> · <span class="bad">< 1 : Déficit</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Current Ratio
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Actif Circulant / Passif Circulant · Liquidité à court terme</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Actif CT / Passif CT</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="current_ratio" placeholder="1.8" step="0.05" min="0" oninput="updateBar('current_ratio',0,3,'normal')" />
+              <span class="ratio-unit">x</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_current_ratio" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">> 1.5 : Bon</span> · <span class="warn">1–1.5 : Attention</span> · <span class="bad">< 1 : Tension</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Marge EBITDA
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">EBITDA / Chiffre d'affaires · Rentabilité opérationnelle</span>
+                </span>
+              </span>
+              <span class="ratio-formula">EBITDA / CA</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="ebitda_margin" placeholder="15" step="0.5" min="0" max="100" oninput="updateBar('ebitda_margin',0,40,'normal')" />
+              <span class="ratio-unit">%</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_ebitda_margin" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">> 15% : Bon</span> · <span class="warn">5–15% : Moyen</span> · <span class="bad">< 5% : Faible</span></div>
+          </div>
+        </div>
+
+        <!-- BEHAVIORAL RATIOS -->
+        <div>
+          <div class="ratio-group-title"><span class="dot orange"></span> Ratios Comportementaux</div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Utilisation ligne crédit
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Encours utilisé / Limite autorisée · Signal de tension trésorerie</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Utilisé / Limite</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="credit_util" placeholder="65" step="1" min="0" max="100" oninput="updateBar('credit_util',0,100,'rev')" />
+              <span class="ratio-unit">%</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_credit_util" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">< 50% : Normal</span> · <span class="warn">50–80% : Vigilance</span> · <span class="bad">> 80% : Tension</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Retards de paiement
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Nombre d'incidents de retard sur les 12 derniers mois</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Nb retards / 12 mois</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="payment_delays" placeholder="2" step="1" min="0" max="20" oninput="updateBar('payment_delays',0,12,'rev')" />
+              <span class="ratio-unit">nb</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_payment_delays" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">0 : Excellent</span> · <span class="warn">1–3 : Attention</span> · <span class="bad">> 3 : Risque</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Dépassements ligne
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Nb de fois que l'entreprise a dépassé sa limite autorisée</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Dépassements / période</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="limit_excess" placeholder="1" step="1" min="0" max="15" oninput="updateBar('limit_excess',0,10,'rev')" />
+              <span class="ratio-unit">nb</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_limit_excess" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">0 : Bon</span> · <span class="warn">1–2 : Tolérable</span> · <span class="bad">> 2 : Signal fort</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Volatilité des flux
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Variation des flux bancaires mensuels sur 12 mois</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Écart-type / Flux moyen</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="flux_volatility" placeholder="20" step="1" min="0" max="100" oninput="updateBar('flux_volatility',0,80,'rev')" />
+              <span class="ratio-unit">%</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_flux_volatility" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">< 20% : Stable</span> · <span class="warn">20–40% : Irrégulier</span> · <span class="bad">> 40% : Instable</span></div>
+          </div>
+
+          <div class="ratio-item">
+            <div class="ratio-header">
+              <span class="ratio-name">Concentration flux
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">ⓘ</span>
+                  <span class="tip">Part du principal client dans les encaissements totaux</span>
+                </span>
+              </span>
+              <span class="ratio-formula">Flux principal / Total</span>
+            </div>
+            <div class="ratio-input-row">
+              <input type="number" id="flux_concentration" placeholder="30" step="1" min="0" max="100" oninput="updateBar('flux_concentration',0,100,'rev')" />
+              <span class="ratio-unit">%</span>
+            </div>
+            <div class="score-bar-wrap"><div class="score-bar-fill" id="bar_flux_concentration" style="width:0%;background:var(--green)"></div></div>
+            <div class="ratio-info"><span class="good">< 30% : Diversifié</span> · <span class="warn">30–60% : Concentration</span> · <span class="bad">> 60% : Dépendance</span></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="analyze-btn" onclick="analyzeRisk()">
+        <span>⚡</span> Lancer l'analyse du risque
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT: RESULT PANEL -->
+  <div class="right-panel">
+
+    <!-- SCORE RESULT -->
+    <div class="result-card" id="result_card">
+      <div class="section-label" style="justify-content:center; margin-bottom:20px">🎯 Score de risque EWS</div>
+
+      <div id="result_placeholder">
+        <div class="placeholder-icon">📡</div>
+        <div class="placeholder-text">Remplissez les ratios et lancez l'analyse pour obtenir le score de risque du client.</div>
+      </div>
+
+      <div id="result_content" style="display:none">
+        <div class="risk-gauge">
+          <svg viewBox="0 0 160 80" width="160" height="80">
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#00e676"/>
+                <stop offset="50%" style="stop-color:#ff9800"/>
+                <stop offset="100%" style="stop-color:#ff1744"/>
+              </linearGradient>
+            </defs>
+            <!-- background arc -->
+            <path d="M 15,75 A 65,65 0 0 1 145,75" fill="none" stroke="#1e2d45" stroke-width="12" stroke-linecap="round"/>
+            <!-- value arc -->
+            <path id="gauge_arc" d="M 15,75 A 65,65 0 0 1 145,75" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 204"/>
+            <!-- needle -->
+            <line id="gauge_needle" x1="80" y1="75" x2="80" y2="25" stroke="white" stroke-width="2" stroke-linecap="round" transform="rotate(0 80 75)"/>
+            <circle cx="80" cy="75" r="5" fill="white"/>
+          </svg>
+        </div>
+
+        <div class="risk-score-text" id="score_display">--</div>
+        <div style="font-size:11px; color:var(--text-dim); margin-bottom:4px">Score sur 100</div>
+        <div class="risk-level-badge" id="risk_badge">--</div>
+        <div style="font-size:12px; color:var(--text-dim)" id="pd_display">Probabilité de défaut : --</div>
+
+        <div class="risk-recommendation" id="recommendation_text"></div>
+      </div>
+    </div>
+
+    <!-- RATIO BREAKDOWN -->
+    <div class="card" id="breakdown_card" style="display:none">
+      <div class="section-label">🔍 Analyse détaillée par ratio</div>
+      <div id="breakdown_list"></div>
+    </div>
+
+    <!-- WEIGHTS -->
+    <div class="weights-card">
+      <div class="weights-title">⚖️ Pondération du modèle</div>
+      <div class="weight-row"><span>Leverage</span><span><span class="weight-tag tag-fin">Financier</span></span><span>12%</span></div>
+      <div class="weight-row"><span>Debt/EBITDA</span><span><span class="weight-tag tag-fin">Financier</span></span><span>13%</span></div>
+      <div class="weight-row"><span>DSCR</span><span><span class="weight-tag tag-fin">Financier</span></span><span>13%</span></div>
+      <div class="weight-row"><span>Current Ratio</span><span><span class="weight-tag tag-fin">Financier</span></span><span>7%</span></div>
+      <div class="weight-row"><span>Marge EBITDA</span><span><span class="weight-tag tag-fin">Financier</span></span><span>10%</span></div>
+      <div class="weight-row"><span>Utilisation ligne</span><span><span class="weight-tag tag-beh">Comportemental</span></span><span>15%</span></div>
+      <div class="weight-row"><span>Retards paiement</span><span><span class="weight-tag tag-beh">Comportemental</span></span><span>15%</span></div>
+      <div class="weight-row"><span>Dépassements ligne</span><span><span class="weight-tag tag-beh">Comportemental</span></span><span>8%</span></div>
+      <div class="weight-row"><span>Volatilité flux</span><span><span class="weight-tag tag-beh">Comportemental</span></span><span>4%</span></div>
+      <div class="weight-row"><span>Concentration flux</span><span><span class="weight-tag tag-beh">Comportemental</span></span><span>3%</span></div>
+      <div style="border-top:1px solid var(--border); margin-top:8px; padding-top:8px; display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim)">
+        <span>Total Financiers</span><span style="color:var(--accent)">55%</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim)">
+        <span>Total Comportementaux</span><span style="color:var(--orange)">45%</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ── UTILS ──────────────────────────────────────────────────────────────────
+function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+
+function updateBar(id, min, max, dir) {
+  const val = parseFloat(document.getElementById(id).value) || 0;
+  const pct = clamp((val - min) / (max - min) * 100, 0, 100);
+  const fill = document.getElementById('bar_' + id);
+  const riskPct = dir === 'rev' ? pct : (100 - pct);
+  fill.style.width = pct + '%';
+  if (riskPct < 33) fill.style.background = 'var(--green)';
+  else if (riskPct < 66) fill.style.background = 'var(--orange)';
+  else fill.style.background = 'var(--red)';
+}
+
+// ── SIGMOID ────────────────────────────────────────────────────────────────
+function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+
+// ── SCORE EACH RATIO (0–100, higher = more risky) ─────────────────────────
+function scoreRatio(id, thresholds) {
+  // thresholds: [goodMax, warnMax, dir]  dir:'rev'=higher is riskier, 'normal'=higher is safer
+  const val = parseFloat(document.getElementById(id).value);
+  if (isNaN(val)) return { score: 50, val: null }; // neutral if missing
+
+  let risk;
+  const [t1, t2, dir] = thresholds;
+  if (dir === 'rev') {
+    // higher value = higher risk
+    if (val <= t1) risk = 10 + (val / t1) * 20;          // low risk 10-30
+    else if (val <= t2) risk = 30 + ((val - t1) / (t2 - t1)) * 35; // medium 30-65
+    else risk = 65 + clamp((val - t2) / t2 * 35, 0, 35); // high 65-100
+  } else {
+    // higher value = lower risk
+    if (val >= t1) risk = 10 + clamp((t1 - val) / t1 * 20, 0, 20); // low
+    else if (val >= t2) risk = 30 + ((t1 - val) / (t1 - t2)) * 35;
+    else risk = 65 + clamp((t2 - val) / t2 * 35, 0, 35);
+  }
+  return { score: clamp(risk, 0, 100), val };
+}
+
+// ── MAIN ANALYSIS ──────────────────────────────────────────────────────────
+function analyzeRisk() {
+  // Score each ratio (risk score 0–100)
+  const ratios = [
+    { id: 'leverage',          label: 'Leverage',            weight: 0.12, t:[2,4,'rev'],   icon:'🏗', unit:'x' },
+    { id: 'debt_ebitda',       label: 'Debt / EBITDA',       weight: 0.13, t:[3,5,'rev'],   icon:'📊', unit:'x' },
+    { id: 'dscr',              label: 'DSCR',                weight: 0.13, t:[1.5,1,'normal'],icon:'💰', unit:'x' },
+    { id: 'current_ratio',     label: 'Current Ratio',       weight: 0.07, t:[1.5,1,'normal'],icon:'💧', unit:'x' },
+    { id: 'ebitda_margin',     label: 'Marge EBITDA',        weight: 0.10, t:[15,5,'normal'], icon:'📈', unit:'%' },
+    { id: 'credit_util',       label: 'Utilisation ligne',   weight: 0.15, t:[50,80,'rev'],  icon:'💳', unit:'%' },
+    { id: 'payment_delays',    label: 'Retards paiement',    weight: 0.15, t:[0,3,'rev'],    icon:'⏱', unit:'' },
+    { id: 'limit_excess',      label: 'Dépassements',        weight: 0.08, t:[0,2,'rev'],    icon:'🚨', unit:'' },
+    { id: 'flux_volatility',   label: 'Volatilité flux',     weight: 0.04, t:[20,40,'rev'],  icon:'📉', unit:'%' },
+    { id: 'flux_concentration',label: 'Concentration flux',  weight: 0.03, t:[30,60,'rev'],  icon:'🎯', unit:'%' },
+  ];
+
+  // Ancienneté bonus (lower risk if longer relationship)
+  const anc = parseInt(document.getElementById('anciennete').value);
+
+  let totalScore = 0;
+  let totalWeight = 0;
+  const results = [];
+
+  ratios.forEach(r => {
+    const s = scoreRatio(r.id, r.t);
+    const weighted = s.score * r.weight;
+    totalScore += weighted;
+    totalWeight += r.weight;
+    results.push({ ...r, riskScore: s.score, val: s.val });
+  });
+
+  // Normalize + ancienneté adjustment
+  let finalScore = totalScore / totalWeight;
+  finalScore = clamp(finalScore - anc, 0, 100);
+
+  // Probability of default (sigmoid-based)
+  const logit = (finalScore - 50) / 15;
+  const pd = sigmoid(logit) * 100;
+
+  showResults(finalScore, pd, results);
+}
+
+function showResults(score, pd, results) {
+  document.getElementById('result_placeholder').style.display = 'none';
+  document.getElementById('result_content').style.display = 'block';
+  document.getElementById('breakdown_card').style.display = 'block';
+
+  // Score display
+  const scoreEl = document.getElementById('score_display');
+  scoreEl.textContent = Math.round(score);
+
+  // Animate gauge
+  const arc = document.getElementById('gauge_arc');
+  const totalLen = 204;
+  const arcLen = (score / 100) * totalLen;
+  arc.style.strokeDasharray = arcLen + ' ' + (totalLen - arcLen);
+
+  const needle = document.getElementById('gauge_needle');
+  const angle = -90 + (score / 100) * 180;
+  needle.setAttribute('transform', `rotate(${angle} 80 75)`);
+
+  // Risk level
+  let level, color, bgColor, borderColor, recommendation;
+
+  if (score < 35) {
+    level = '🟢 FAIBLE RISQUE';
+    color = 'var(--green)';
+    bgColor = 'rgba(0,230,118,0.1)';
+    borderColor = 'rgba(0,230,118,0.3)';
+    scoreEl.style.color = 'var(--green)';
+    recommendation = `✅ <strong>Décision recommandée :</strong> Client sain. La probabilité de défaut est très faible.<br><br>
+    📋 <strong>Action :</strong> Maintenir la relation. Opportunité de cross-selling (cash management, trade finance).<br><br>
+    🔄 <strong>Suivi :</strong> Revue annuelle standard.`;
+  } else if (score < 60) {
+    level = '🟠 RISQUE MODÉRÉ';
+    color = 'var(--orange)';
+    bgColor = 'rgba(255,152,0,0.1)';
+    borderColor = 'rgba(255,152,0,0.3)';
+    scoreEl.style.color = 'var(--orange)';
+    recommendation = `⚠️ <strong>Décision recommandée :</strong> Surveillance renforcée. Signaux de fragilité détectés.<br><br>
+    📋 <strong>Action :</strong> Demander des états financiers récents. Planifier une rencontre avec le client.<br><br>
+    🔄 <strong>Suivi :</strong> Revue trimestrielle. Vigilance sur les variables comportementales.`;
+  } else if (score < 80) {
+    level = '🔴 RISQUE ÉLEVÉ';
+    color = 'var(--red)';
+    bgColor = 'rgba(255,23,68,0.1)';
+    borderColor = 'rgba(255,23,68,0.3)';
+    scoreEl.style.color = 'var(--red)';
+    recommendation = `🚨 <strong>Alerte activée :</strong> Détérioration significative du profil de risque.<br><br>
+    📋 <strong>Action :</strong> Révision immédiate des limites de crédit. Demande de garanties supplémentaires. Réduire l'exposition si nécessaire.<br><br>
+    🔄 <strong>Suivi :</strong> Revue mensuelle. Classement en Stage 2 (IFRS 9).`;
+  } else {
+    level = '⛔ RISQUE CRITIQUE';
+    color = '#ff0040';
+    bgColor = 'rgba(255,0,64,0.15)';
+    borderColor = 'rgba(255,0,64,0.4)';
+    scoreEl.style.color = '#ff0040';
+    recommendation = `⛔ <strong>Situation critique :</strong> Probabilité de défaut très élevée.<br><br>
+    📋 <strong>Action :</strong> Gel ou réduction immédiate des lignes. Ouverture d'un dossier de restructuration. Provisionnement IFRS 9 Stage 3.<br><br>
+    🔄 <strong>Escalade :</strong> Transmettre à la Direction Risques pour décision urgente.`;
+  }
+
+  const badge = document.getElementById('risk_badge');
+  badge.textContent = level;
+  badge.style.background = bgColor;
+  badge.style.border = '1px solid ' + borderColor;
+  badge.style.color = color;
+
+  document.getElementById('pd_display').innerHTML = `Probabilité de défaut estimée : <strong style="color:${color}">${pd.toFixed(1)}%</strong>`;
+  document.getElementById('recommendation_text').innerHTML = recommendation;
+
+  // BREAKDOWN
+  const list = document.getElementById('breakdown_list');
+  list.innerHTML = '';
+  results.sort((a,b) => b.riskScore - a.riskScore);
+
+  results.forEach(r => {
+    let bColor = r.riskScore < 35 ? 'var(--green)' : r.riskScore < 65 ? 'var(--orange)' : 'var(--red)';
+    let bgIcon = r.riskScore < 35 ? 'rgba(0,230,118,0.1)' : r.riskScore < 65 ? 'rgba(255,152,0,0.1)' : 'rgba(255,23,68,0.1)';
+    const valDisplay = r.val !== null ? (r.val + (r.unit ? ' ' + r.unit : '')) : 'N/A';
+    const isBehav = ['credit_util','payment_delays','limit_excess','flux_volatility','flux_concentration'].includes(r.id);
+
+    list.innerHTML += `
+      <div class="breakdown-item">
+        <div class="breakdown-icon" style="background:${bgIcon}">${r.icon}</div>
+        <div class="breakdown-info">
+          <div class="breakdown-name">${r.label} <span style="font-size:10px; color:var(--text-dim)">[${isBehav ? 'Comportemental' : 'Financier'}]</span></div>
+          <div class="breakdown-val">Valeur : ${valDisplay} · Poids : ${(r.weight*100).toFixed(0)}%</div>
+          <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width:${r.riskScore}%; background:${bColor}"></div></div>
+        </div>
+        <div class="breakdown-score" style="color:${bColor}">${Math.round(r.riskScore)}</div>
+      </div>`;
+  });
+
+  // Scroll to result
+  document.getElementById('result_card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
